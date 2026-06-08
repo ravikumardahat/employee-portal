@@ -3,8 +3,8 @@ import mysql.connector
 
 app = Flask(__name__)
 
-@app.route("/")
-def home():
+@app.route("/add")
+def add_employee():
 
     conn = mysql.connector.connect(
         host="mysql-service",
@@ -15,13 +15,20 @@ def home():
 
     cursor = conn.cursor()
 
-    cursor.execute("SELECT NOW()")
+    sql = """
+    INSERT INTO employees(name, role)
+    VALUES(%s,%s)
+    """
 
-    result = cursor.fetchone()
+    values = ("Ravi", "DevOps")
+
+    cursor.execute(sql, values)
+
+    conn.commit()
 
     conn.close()
 
-    return f"MySQL Connected: {result}"
+    return "Employee Added"
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
