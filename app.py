@@ -5,33 +5,8 @@ app = Flask(__name__)
 
 @app.route("/add")
 def add_employee():
-
-    conn = mysql.connector.connect(
-        host="mysql-service",
-        user="root",
-        password="root123",
-        database="employee_db"
-    )
-
-    cursor = conn.cursor()
-
-    sql = """
-    INSERT INTO employees(name, role)
-    VALUES(%s,%s)
-    """
-
-    values = ("Ravi", "DevOps")
-
-    cursor.execute(sql, values)
-
-    conn.commit()
-
-    conn.close()
-
+    # your existing code
     return "Employee Added"
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
 
 @app.route("/view")
 def view_employees():
@@ -52,3 +27,6 @@ def view_employees():
     conn.close()
 
     return str(result)
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
