@@ -32,3 +32,23 @@ def add_employee():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
+
+@app.route("/view")
+def view_employees():
+
+    conn = mysql.connector.connect(
+        host="mysql-service",
+        user="root",
+        password="root123",
+        database="employee_db"
+    )
+
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM employees")
+
+    result = cursor.fetchall()
+
+    conn.close()
+
+    return str(result)
