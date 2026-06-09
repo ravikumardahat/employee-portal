@@ -38,12 +38,24 @@
 
 <div class="mb-3">
 
-<label>Role</label>
+<label>Department</label>
 
 <input type="text"
        class="form-control"
-       name="role"
+       name="department"
        value="{{ employee[2] }}"
+       required>
+
+</div>
+
+<div class="mb-3">
+
+<label>Email</label>
+
+<input type="email"
+       class="form-control"
+       name="email"
+       value="{{ employee[3] }}"
        required>
 
 </div>
@@ -61,7 +73,9 @@
 </form>
 
 </div>
+
 </div>
+
 </div>
 
 </body>
