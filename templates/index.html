@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Portal</title>
+</head>
+<body>
+
+<h1>Employee Portal</h1>
+
+<form action="/add" method="post">
+
+    Name:
+    <input type="text" name="name">
+
+    <br><br>
+
+    Role:
+    <input type="text" name="role">
+
+    <br><br>
+
+    <input type="submit" value="Add Employee">
+
+</form>
+
+<hr>
+
+<h2>Employees</h2>
+
+<ul>
+{% for emp in employees %}
+<li>
+    {{ emp[0] }} - {{ emp[1] }} - {{ emp[2] }}
+</li>
+{% endfor %}
+</ul>
+
+</body>
+</html>
