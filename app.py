@@ -10,7 +10,6 @@ DB_CONFIG = {
     "database": "employee_db"
 }
 
-
 def get_connection():
     return mysql.connector.connect(**DB_CONFIG)
 
@@ -45,6 +44,23 @@ def add_employee():
     cursor.execute(
         "INSERT INTO employees(name, role) VALUES(%s,%s)",
         (name, role)
+    )
+
+    conn.commit()
+    conn.close()
+
+    return redirect("/")
+
+
+@app.route("/delete/<int:id>")
+def delete_employee(id):
+
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "DELETE FROM employees WHERE id=%s",
+        (id,)
     )
 
     conn.commit()

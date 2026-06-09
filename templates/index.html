@@ -63,6 +63,8 @@
                         <th>ID</th>
                         <th>Name</th>
                         <th>Role</th>
+			<th>Action</th>
+		
                     </tr>
                 </thead>
 
@@ -74,6 +76,12 @@
                     <td>{{ emp[0] }}</td>
                     <td>{{ emp[1] }}</td>
                     <td>{{ emp[2] }}</td>
+		    <td>
+                     <a href="/delete/{{ emp[0] }}"
+                      class="btn btn-danger btn-sm">
+                      Delete
+                       </a>
+                </td>
                 </tr>
 
                 {% endfor %}
