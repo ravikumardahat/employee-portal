@@ -6,7 +6,7 @@ app = Flask(__name__)
 DB_CONFIG = {
     "host": "mysql",
     "user": "root",
-    "password": "root123",
+    "password": os.getenv("MYSQL_PASSWORD"),
     "database": "employee_db"
 }
 
