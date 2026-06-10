@@ -4,7 +4,7 @@ import mysql.connector
 app = Flask(__name__)
 
 DB_CONFIG = {
-    "host": "mysql-service",
+    "host": "mysql",
     "user": "root",
     "password": "root123",
     "database": "employee_db"
@@ -12,7 +12,6 @@ DB_CONFIG = {
 
 def get_connection():
     return mysql.connector.connect(**DB_CONFIG)
-
 
 @app.route("/")
 def home():
@@ -31,26 +30,29 @@ def home():
         employees=employees
     )
 
-
 @app.route("/add", methods=["POST"])
 def add_employee():
 
     name = request.form["name"]
-    role = request.form["role"]
+    department = request.form["department"]
+    email = request.form["email"]
 
     conn = get_connection()
     cursor = conn.cursor()
 
     cursor.execute(
-        "INSERT INTO employees(name, role) VALUES(%s,%s)",
-        (name, role)
+        """
+        INSERT INTO employees
+        (name, department, email)
+        VALUES(%s,%s,%s)
+        """,
+        (name, department, email)
     )
 
     conn.commit()
     conn.close()
 
     return redirect("/")
-
 
 @app.route("/delete/<int:id>")
 def delete_employee(id):
@@ -68,9 +70,51 @@ def delete_employee(id):
 
     return redirect("/")
 
+@app.route("/edit/<int:id>")
+def edit_employee(id):
+
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "SELECT * FROM employees WHERE id=%s",
+        (id,)
+    )
+
+    employee = cursor.fetchone()
+
+    conn.close()
+
+    return render_template(
+        "edit.html",
+        employee=employee
+    )
+
+@app.route("/update/<int:id>", methods=["POST"])
+def update_employee(id):
+
+    name = request.form["name"]
+    department = request.form["department"]
+    email = request.form["email"]
+
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute(
+        """
+        UPDATE employees
+        SET name=%s,
+            department=%s,
+            email=%s
+        WHERE id=%s
+        """,
+        (name, department, email, id)
+    )
+
+    conn.commit()
+    conn.close()
+
+    return redirect("/")
 
 if __name__ == "__main__":
-    app.run(
-        host="0.0.0.0",
-        port=5000
-    )
+    app.run(host="0.0.0.0", port=5000)
