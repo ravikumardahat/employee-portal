@@ -3,12 +3,11 @@ import os
 import mysql.connector
 
 app = Flask(__name__)
-
 DB_CONFIG = {
-    "host": "mysql",
+    "host": os.getenv("MYSQL_HOST"),
     "user": "root",
     "password": os.getenv("MYSQL_PASSWORD"),
-    "database": "employee_db"
+    "database": os.getenv("MYSQL_DATABASE")
 }
 
 def get_connection():
