@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: emp-info
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: emp-info
+
+  template:
+    metadata:
+      labels:
+        app: emp-info
+
+    spec:
+
+      initContainers:
+      - name: wait-for-mysql
+        image: busybox
+        command:
+        - sh
+        - -c
+        - |
+          echo "Waiting for MySQL..."
+          sleep 10
+
+      containers:
+      - name: emp-info
+        image: ravikumardahat/employee-connect:21
+
+        env:
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: MYSQL_PASSWORD
+        - name: MYSQL_HOST
+          valueFrom:
+               configMapKeyRef:
+                  name: mysql-config
+                  key: MYSQL_HOST
+        - name: MYSQL_DATABASE            
+          valueFrom:
+             configMapKeyRef:
+                name: mysql-config
+                key:  MYSQL_DATABASE 
+        ports:
+        - containerPort: 5000
+
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 5000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 5000
+          initialDelaySeconds: 15
+          periodSeconds: 20
+
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
