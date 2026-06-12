@@ -1,15 +1,20 @@
-name: DevSecOps End To End Pipeline
+name: CI Pipeline
 
-on: 
-    push:
-        branches: [main]
+on:
+  push:
+    branches:
+      - main
+      - dev
 
 jobs:
-    # CI (Continous Integration with Security Scanning)
-    code-quality:
-        uses: ./.github/workflows/code-quality.yml
-    
-    # Image scan 
-    trivy:
-        uses: ./.github/workflows/image-scan.yml
-        secrets: inherit
+
+  code-scan:
+    uses: ./.github/workflows/code-scanner.yml
+
+  image-scan:
+    needs: code-scan
+    uses: ./.github/workflows/image-scanner.yml
+
+  docker-build:
+    needs: image-scan
+    uses: ./.github/workflows/docker-build.yml
