@@ -1,0 +1,18 @@
+name: DevSecOps End To End Pipeline
+
+on: 
+    push:
+        branches: [main]
+
+jobs:
+    # CI (Continous Integration with Security Scanning)
+    code-quality:
+        uses: ./.github/workflows/code-quality.yml
+    
+    # Image scan 
+    trivy:
+        needs: [build]
+        uses: ./.github/workflows/image-scan.yml
+        secrets: inherit
+ 
+    
