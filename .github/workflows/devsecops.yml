@@ -10,14 +10,16 @@ jobs:
   code-scan:
     uses: ./.github/workflows/code-scan.yaml
 
+  secret-scan:
+    needs: secret-scan
+    uses: ./.github/workflows/dockerfile-scan.yml
+
   docker-build:
     needs: code-scan
     uses: ./.github/workflows/docker-build.yml
     secrets: inherit
 
-  secret-scan:
-    needs: secret-scan
-    uses: ./.github/workflows/dockerfile-scan.yml
+
     
 
   image-scan:
