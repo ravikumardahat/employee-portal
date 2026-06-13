@@ -9,11 +9,15 @@ jobs:
 
        steps:
            - uses: actions/checkout@v4
-
-           - name: TrivyScan
-             uses: aquasecurity/trivy-action@master
+           - name: Login to Docker Hub
+             uses: docker/login-action@v3
              with:
-               image-ref: employee-portal:${{ github.sha }}
+                username: ${{ secrets.DOCKERHUB_USERNAME }}
+                password: ${{ secrets.DOCKERHUB_TOKEN }}
+           - name: TrivyScan
+             uses: aquasecurity/trivy-action@0.33.1
+             with:
+               image-ref: docker.io/ravikumardahat/employee-portal:${{ github.sha }}
                severity: HIGH,CRITICAL
                exit-code: 1
             
