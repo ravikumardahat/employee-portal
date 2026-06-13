@@ -30,4 +30,4 @@ jobs:
     secrets: inherit
   k8s-scan:
     needs: image-scan
-    uses: ./.github/workflows/k8s-scan.yml  
+    uses: ./.github/workflows/k8s-scan.yaml  
