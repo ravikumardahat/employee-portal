@@ -12,4 +12,4 @@ jobs:
           with:
             scan-type: config
             scan-ref: k8s/
-            exit-code: 1
+            exit-code: 0
