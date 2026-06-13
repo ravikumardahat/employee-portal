@@ -9,7 +9,7 @@ jobs:
 
        steps:
            - uses: actions/checkout@v4
-           - name: actions/setup-python@v5
+           - usues: actions/setup-python@v5
              with:
                   python-version: '3.11'
            - name: Install Tools
