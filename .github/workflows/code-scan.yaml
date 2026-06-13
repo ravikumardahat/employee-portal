@@ -20,8 +20,8 @@ jobs:
                     pip install flake8 bandit pip-audit
                     pip install -r requirements.txt
                     
-           - name: Flask8 scan
-             run: flask8 .
+           - name: flake8 scan
+             run: flake8 .
            - name: Run Depndency scan
 
              run: pip-audit   
