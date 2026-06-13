@@ -8,19 +8,19 @@ jobs:
        runs-on: ubuntu-latest
 
        steps:
-           - use: actions/checkout@v4
+           - uses: actions/checkout@v4
            - name: actions/setup-python@v5
-              with:
+             with:
                   python-version: '3.11'
            - name: Install Tools
-               run: |
+             run: |
                     pip install flask8 bandit pip-audit
                     pip install -r requirments.txt
                     
            - name: Flask8 scan
              run: flask8 .
            - name: Run Depndency scan
-           
+
              run: pip-audit   
            - name: Bandit scan
              run: bandit -r .       
