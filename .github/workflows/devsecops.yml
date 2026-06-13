@@ -11,7 +11,7 @@ jobs:
     uses: ./.github/workflows/code-scan.yaml
 
   docker-build:
-    #needs: dependency-scan
+    needs: code-scan
     uses: ./.github/workflows/docker-build.yml
     secrets: inherit
 
