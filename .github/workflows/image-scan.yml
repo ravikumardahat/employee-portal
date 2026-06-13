@@ -16,7 +16,7 @@ jobs:
                 username: ${{ secrets.DOCKER_USERNAME }}
                 password: ${{ secrets.DOCKER_PASSWORD }}
            - name: TrivyScan
-             uses: aquasecurity/trivy-action@0.35.0
+             uses: aquasecurity/trivy-action@0.71.0
              with:
                image-ref: docker.io/ravikumardahat/employee-connect:latest
                severity: HIGH,CRITICAL
