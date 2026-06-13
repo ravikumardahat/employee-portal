@@ -11,11 +11,11 @@ jobs:
     uses: ./.github/workflows/code-scan.yaml
 
   secret-scan:
-  
+    
     uses: ./.github/workflows/secret-scan.yml
 
   docker-build:
-    needs: code-scan
+    needs: [code-scan ,secret-scan]
     uses: ./.github/workflows/docker-build.yml
     secrets: inherit
 
