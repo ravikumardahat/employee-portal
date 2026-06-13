@@ -2,6 +2,7 @@ name: Code Scan
 
 on: 
    workflow_call:
+   workflow_dispatch:
 
 jobs:
     code-scan:

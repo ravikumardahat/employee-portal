@@ -2,6 +2,7 @@ name: Image Scan
 
 on: 
    workflow_call:
+   workflow_dispatch:
 
 jobs:
     image-scan:
