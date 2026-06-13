@@ -18,7 +18,7 @@ jobs:
              run: |
                     python -m pip install --upgrade pip
                     pip install flake8 bandit pip-audit
-                    pip install -r requirments.txt
+                    pip install -r src/requirements.txt
                     
            - name: Flask8 scan
              run: flask8 .
