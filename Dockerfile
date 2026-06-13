@@ -1,11 +1,20 @@
-FROM python:3.11-slim
+FROM python:3.11.13-slim-bookworm
 
 WORKDIR /app
 
 COPY requirements.txt .
 
-RUN pip install --upgrade pip setuptools wheel && \
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* 
+
+RUN pip install --no-cache-dir \
+    pip==25.1.1 \
+    setuptools==80.9.0 \
+    wheel==0.45.1 && \
     pip install --no-cache-dir -r requirements.txt
+    
 RUN useradd -m appuser
 
 COPY . .
