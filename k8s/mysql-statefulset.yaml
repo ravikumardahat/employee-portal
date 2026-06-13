@@ -13,9 +13,21 @@ spec:
             labels:
                 app: mysql
         spec:
+             securityContext:
+                seccompProfile:
+                    type: RuntimeDefault
              containers:
                  - name: mysql
                    image: mysql:8.0
+                   securityContext:
+                       allowPrivilegeEscalation: false
+                       runAsNonRoot: true
+                       runAsUser: 1000
+                       runAsGroup: 1000
+                       readOnlyRootFilesystem: true
+                       capabilities:
+                          drop:
+                            - ALL
                    env:
                        - name: MYSQL_ROOT_PASSWORD
                          value: root123
