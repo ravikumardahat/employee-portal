@@ -28,3 +28,6 @@ jobs:
     needs: docker-build
     uses: ./.github/workflows/image-scan.yml
     secrets: inherit
+  k8s-scan:
+    needs: image-scan
+    uses: ./.github/workflows/k8s-scan.yml  

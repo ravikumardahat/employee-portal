@@ -1,0 +1,15 @@
+name: k8s-scan
+on:
+  workflow_call:
+  workflow_dispatch:  
+jobs:
+    k8s-scan:
+      runs-on: ubuntu-latest
+      steps:  
+        - uses: actions/checkout@v4
+        - name: scan k8s Mainfests
+          uses: aquasecurity/trivy-action@master
+          with:
+            scan-type: config
+            scan-ref: k8s/
+            exit-code: 1
