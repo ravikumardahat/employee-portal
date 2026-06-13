@@ -11,7 +11,7 @@ jobs:
     uses: ./.github/workflows/code-scan.yaml
 
   secret-scan:
-    needs: secret-scan
+  
     uses: ./.github/workflows/secret-scan.yml
 
   docker-build:
