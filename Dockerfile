@@ -19,7 +19,7 @@ RUN groupadd -g 10001 appgroup && \
     useradd -u 10001 -g 10001 -m appuser
 
 COPY . .
-RUN chown -R appuser:appuser /app
+RUN chown -R appuser:appgroup /app
 USER appuser
 EXPOSE 5000
 
