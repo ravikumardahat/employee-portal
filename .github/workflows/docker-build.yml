@@ -22,8 +22,8 @@ jobs:
 
     - name: Build Docker Image
       run: |
-        docker build -t ravikumardahat/employee-connect:${{ github.run_number }} .
+        docker build -t ravikumardahat/employee-connect:latest .
 
     - name: Push Docker Image
       run: |
-        docker push ravikumardahat/employee-connect:${{ github.run_number }}
+        docker push ravikumardahat/employee-connect:latest
