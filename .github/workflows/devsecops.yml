@@ -13,6 +13,7 @@ jobs:
   docker-build:
     #needs: dependency-scan
     uses: ./.github/workflows/docker-build.yml
+    secrets: inherit
 
   image-scan:
     needs: docker-build

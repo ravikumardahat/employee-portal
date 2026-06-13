@@ -16,7 +16,8 @@ jobs:
                   python-version: '3.11'
            - name: Install Tools
              run: |
-                    pip install flask8 bandit pip-audit
+                    python -m pip install --upgrade pip
+                    pip install flake8 bandit pip-audit
                     pip install -r requirments.txt
                     
            - name: Flask8 scan
