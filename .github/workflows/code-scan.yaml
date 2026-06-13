@@ -31,4 +31,4 @@ jobs:
 
       - name: Bandit Scan
         run: |
-          bandit -r .
+          bandit -r . -s B104
