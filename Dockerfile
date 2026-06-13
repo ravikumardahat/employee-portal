@@ -15,7 +15,8 @@ RUN pip install --no-cache-dir \
     wheel==0.45.1 && \
     pip install --no-cache-dir -r requirements.txt
     
-RUN useradd -m appuser
+RUN groupadd -g 10001 appgroup && \
+    useradd -u 10001 -g 10001 -m appuser
 
 COPY . .
 RUN chown -R appuser:appuser /app
