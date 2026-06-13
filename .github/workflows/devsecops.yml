@@ -8,7 +8,7 @@ on:
 jobs:
 
   code-scan:
-    uses: ./.github/workflows/code-scan.yml
+    uses: ./.github/workflows/code-scan.yaml
 
   docker-build:
     #needs: dependency-scan
