@@ -15,6 +15,11 @@ jobs:
     uses: ./.github/workflows/docker-build.yml
     secrets: inherit
 
+  secret-scan:
+    needs: secret-scan
+    uses: ./.github/workflows/dockerfile-scan.yml
+    
+
   image-scan:
     needs: docker-build
     uses: ./.github/workflows/image-scan.yml
