@@ -8,6 +8,6 @@ jobs:
 
        steps:
            - use: actions/checkout@v4
-
            - name: Build Docker Image
-             run: docker build -t employee-portal:${{ github.sha }} .
+             run: |
+              docker build -t employee-portal:${{ github.sha }} .
