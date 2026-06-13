@@ -19,7 +19,7 @@ spec:
     spec:
       securityContext:
         seccompProfile:
-          type: RunetimeDefault
+          type: RuntimeDefault
           
 
       initContainers:
@@ -50,7 +50,7 @@ spec:
              drop:
                - ALL
 
-      6containers:
+      containers:
       - name: emp-info
         image: ravikumardahat/employee-connect:21
 
