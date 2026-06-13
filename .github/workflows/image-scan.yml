@@ -18,7 +18,7 @@ jobs:
            - name: TrivyScan
              uses: aquasecurity/trivy-action@0.35.0
              with:
-               image-ref: docker.io/ravikumardahat/employee-portal:${{ github.run_number }}
+               image-ref: docker.io/ravikumardahat/employee-employee-connect:${{ github.run_number }}
                severity: HIGH,CRITICAL
                exit-code: 1
             
