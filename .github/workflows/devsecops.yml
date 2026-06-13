@@ -1,0 +1,19 @@
+name: DevSecOps Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+
+  code-scan:
+    uses: ./.github/workflows/code-scan.yml
+
+  docker-build:
+    #needs: dependency-scan
+    uses: ./.github/workflows/docker-build.yml
+
+  image-scan:
+    needs: docker-build
+    uses: ./.github/workflows/image-scan.yml

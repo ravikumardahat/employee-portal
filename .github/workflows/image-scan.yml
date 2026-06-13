@@ -1,0 +1,19 @@
+name: Image Scan
+
+on: 
+   workflow_call:
+
+jobs:
+    image-scan:
+       runs-on: ubuntu-latest
+
+       steps:
+           - use: actions/checkout@v4
+
+           - name: TrivyScan
+             use: aquasecurity/trivy-action@master
+             with:
+               image-ref: employee-portal:${{ github.sha }}
+               severity: HIGH,CRITICAL
+               exit-code: 1
+            
