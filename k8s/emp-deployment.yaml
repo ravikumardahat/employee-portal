@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: emp-info
+  namespace: employee
 
 spec:
   replicas: 2
@@ -16,20 +17,52 @@ spec:
         app: emp-info
 
     spec:
+      securityContext:
+        seccompProfile:
+          type: RunetimeDefault
+          
 
       initContainers:
       - name: wait-for-mysql
-        image: busybox
+        image: busybox:1.36
         command:
         - sh
         - -c
         - |
           echo "Waiting for MySQL..."
           sleep 10
+        resources:
+          requests:
+            cpu: "50m"
+            memory: "64Mi"
+          limits:
+            cpu: "100m"
+            memory: "128Mi" 
 
-      containers:
+
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          runAsUser: 1001
+          runAsGroup: 1001
+          readOnlyRootFilesystem: true
+          capabilities:
+             drop:
+               - ALL
+
+      6containers:
       - name: emp-info
         image: ravikumardahat/employee-connect:21
+
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          runAsUser: 1001
+          runAsGroup: 1001
+          readOnlyRootFilesystem: true
+          capabilities:
+             drop:
+               - All 
 
         env:
         - name: MYSQL_PASSWORD
