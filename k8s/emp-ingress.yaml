@@ -2,6 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
     name: emp-ingress
+    namespace: employee
 spec:
     ingressClassName: nginx
     rules:
