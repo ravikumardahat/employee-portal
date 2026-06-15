@@ -34,3 +34,15 @@ jobs:
       run: |
         git config --global user.email "github-actions@github.com"
         git config --global user.name "github-actions"
+    - name: Update Deployment Image Tag
+      run: |
+        sed -i "s|image: ravikumardahat/employee-connect:.*|image: ravikumardahat/employee-connect:${{ github.run_number }}|g" k8s/emp-deployment.yaml
+
+    - name: Commit and Push Changes
+      run: |
+        git add k8s/emp-deployment.yaml
+    
+        git diff --staged --quiet || \
+        git commit -m "Update image tag to ${{ github.run_number }}"
+    
+        git push
