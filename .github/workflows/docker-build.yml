@@ -30,3 +30,7 @@ jobs:
       run: |
         docker push ravikumardahat/employee-connect:${{ github.run_number }}
         docker push ravikumardahat/employee-connect:latest
+    - name: Configure Git
+      run: |
+        git config --global user.email "github-actions@github.com"
+        git config --global user.name "github-actions"
