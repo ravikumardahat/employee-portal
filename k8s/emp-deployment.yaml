@@ -52,7 +52,7 @@ spec:
 
       containers:
       - name: emp-info
-        image: ravikumardahat/employee-connect:71
+        image: ravikumardahat/employee-connect:72
 
         securityContext:
           allowPrivilegeEscalation: false
